@@ -1,0 +1,47 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <h4>Véradó űrlap</h4>
+        <hr>
+    </div>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <form [formGroup]="bloodDonorForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Véradó teljes neve</label>
+                <input type="text" class="form-control" id="name" name="name" formControlName="name">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Nem</label>
+                <select name="gender" id="gender" class="form-select" formControlName="gender">
+                    <option value="female">Nő</option>
+                    <option value="male">Férfi</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="nationality" class="form-label">Nemzetiség</label>
+                <input type="text" class="form-control" id="nationality" name="nationality" formControlName="nationality">
+            </div>
+            <div class="mb-3">
+                <label for="placeOfBirth" class="form-label">Születési hely</label>
+                <input type="text" class="form-control" id="placeOfBirth" name="placeOfBirth" formControlName="placeOfBirth">
+            </div>
+            <div class="mb-3">
+                <label for="dateOfBirth" class="form-label">Születési dátum</label>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth">
+            </div>
+            <div class="mb-3">
+                <label for="homeAdress" class="form-label">Lakcím</label>
+                <input type="text" class="form-control" id="homeAdress" name="homeAdress" formControlName="homeAdress">
+            </div>
+            <div class="mb-3">
+                <label for="TAJnumber" class="form-label">TAJ szám</label>
+                <input type="number" class="form-control" id="TAJnumber" name="TAJnumber" formControlName="TAJnumber">
+            </div>
+            <div class="text-end">
+                <button class="btn btn-outline-primary" (click)="saveBloodDonor()">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>

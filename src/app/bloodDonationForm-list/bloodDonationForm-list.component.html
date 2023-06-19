@@ -1,0 +1,86 @@
+<div class="row justify-content-md-center">
+	<div class="col-md-12">
+		<h4>Sikeres véradások listája</h4>
+		<hr>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<label for="selectedBloodDonor" class="form-label">Véradó neve</label>
+			<select name="selectedBloodDonor" id="selectedBloodDonor" class="form-select"
+				aria-label=".form-select-sm example" [(ngModel)]="selectedBloodDonor" (ngModelChange)="filterTable()">
+				<option value="">Összes</option>
+				<option *ngFor="let bloodDonor of bloodDonors" [ngValue]="{ id: bloodDonor.id }">
+					{{ bloodDonor.name }}
+				</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<label for="selectedLocation" class="form-label">Intézmény neve</label>
+			<select name="selectedLocation" id="selectedLocation" class="form-select"
+				aria-label=".form-select-sm example" [(ngModel)]="selectedLocation" (ngModelChange)="filterTable()">
+				<option value="">Összes</option>
+				<option *ngFor="let location of locations" [ngValue]="{ id: location.id }">
+					{{ location.institutionName }}
+				</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<label for="fromDate" class="form-label">Kezdő dátum</label>
+			<input type="date" class="form-control" id="fromDate" name="fromDate" [(ngModel)]="selectedStartDate" (ngModelChange)="filterTable()">
+		</div>
+		<div class="col-md-3">
+			<label for="toDate" class="form-label">Vég dátum</label>
+			<input type="date" class="form-control" id="toDate" name="toDate" [(ngModel)]="selectedEndDate" (ngModelChange)="filterTable()">
+		</div>
+	</div>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">Véradás dátuma</th>
+			<th scope="col">Vizsgálatot végző orvos neve</th>
+			<th scope="col">Irányított véradás</th>
+			<th scope="col">Beteg neve</th>
+			<th scope="col">Beteg TAJ száma</th>
+			<th scope="col">Véradó neve</th>
+			<th scope="col">Intézmény neve</th>
+		</tr>
+	</thead>
+	<tbody>
+		<ng-container *ngFor="let bloodDonationForm of filteredBloodDonationForms">
+			<tr>
+				<th scope="row" *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm.id | number }}
+				</th>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm.dateOfBloodDonation }}
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm.examiningDoctorName }}
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm.isDirectedBloodDonation }}
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm.patientFullName }}
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					<span *ngIf="bloodDonationForm.patientTAJnumber === 0; then thenBlock else elseBlock"></span>
+					<ng-template #thenBlock> </ng-template>
+					<ng-template #elseBlock>{{ bloodDonationForm.patientTAJnumber }}</ng-template>
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm?.bloodDonor?.name }}
+				</td>
+				<td *ngIf="bloodDonationForm.isSuitable === 'igen'">
+					{{ bloodDonationForm?.location?.institutionName }}
+				</td>
+			</tr>
+		</ng-container>
+	</tbody>
+</table>

@@ -1,0 +1,32 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <h4>Új helyszín rögzítése</h4>
+        <hr>
+    </div>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <form [formGroup]="locationForm">
+            <div class="mb-3">
+                <label for="institutionName" class="form-label">Intézmény neve</label>
+                <input type="text" class="form-control" id="institutionName" name="institutionName"
+                formControlName="institutionName">
+            </div>
+            <div class="mb-3">
+                <label for="adress" class="form-label">Cím</label>
+                <input type="text" class="form-control" id="adress" name="adress" formControlName="adress">
+            </div>
+            <div class="mb-3">
+                <label for="isActive" class="form-label">Státusz</label>
+                <select name="isActive" id="isActive" class="form-select" formControlName="isActive">
+                    <option value="true">Aktív</option>
+                    <option value="false">Inaktív</option>
+                </select>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-outline-primary" (click)="saveLocation()">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>

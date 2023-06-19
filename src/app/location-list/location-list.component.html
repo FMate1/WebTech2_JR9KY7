@@ -1,0 +1,31 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-12">
+        <h4>Helyszínek listája</h4>
+        <hr>
+    </div>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+            <th scope="col">ID</th>
+			<th scope="col">Intézmény neve</th>
+			<th scope="col">Cím</th>
+			<th scope="col">Státusz</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let location of locations">
+			<th scope="row">{{ location.id | number }}</th>
+			<td>{{ location.institutionName }}</td>
+			<td>{{ location.adress }}</td>
+			<td>
+				<span *ngIf="location.isActive === true; then thenBlock else elseBlock"></span>
+				<ng-template #thenBlock>Aktív</ng-template>
+				<ng-template #elseBlock>Inaktív</ng-template>
+			</td>
+			<td *ngIf="authService.isLoggedIn()"><button class="btn btn-sm btn-outline-success" (click)="activateLocation(location)">Aktiválás</button></td>
+			<td *ngIf="authService.isLoggedIn()"><button class="btn btn-sm btn-outline-danger" (click)="deactivateLocation(location)">Deaktiválás</button></td>
+		</tr>
+	</tbody>
+</table>
